@@ -1,5 +1,5 @@
 {
-	"name": "PL_SNOWFLAKE_PARQUET",
+	"name": "PL_SNOWFLAKE",
 	"properties": {
 		"activities": [
 			{

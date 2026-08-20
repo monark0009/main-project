@@ -1,5 +1,5 @@
 {
-	"name": "PL_SFTP_PARQUET",
+	"name": "PL_SFTP",
 	"properties": {
 		"activities": [
 			{

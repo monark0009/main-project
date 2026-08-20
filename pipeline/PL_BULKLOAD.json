@@ -1,5 +1,5 @@
 {
-	"name": "PL_BULKLOAD_PARQUET",
+	"name": "PL_BULKLOAD",
 	"properties": {
 		"activities": [
 			{

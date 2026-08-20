@@ -1,5 +1,5 @@
 {
-	"name": "PL_SQLSERVER_PARQUET",
+	"name": "PL_SQLSERVER",
 	"properties": {
 		"activities": [
 			{
