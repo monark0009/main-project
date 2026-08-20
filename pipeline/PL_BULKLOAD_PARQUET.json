@@ -1,0 +1,6 @@
+{
+	"name": "PL_BULKLOAD_PARQUET",
+	"properties": {
+		"annotations": []
+	}
+}

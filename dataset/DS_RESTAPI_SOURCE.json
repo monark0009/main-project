@@ -1,0 +1,12 @@
+{
+	"name": "DS_RESTAPI_SOURCE",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_RESTAPI_SOURCE",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "RestResource",
+		"schema": []
+	}
+}

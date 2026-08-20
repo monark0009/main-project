@@ -1,8 +1,8 @@
 {
-	"name": "DS_SQLSERVER_SINK",
+	"name": "DS_RESTAPI_SINK",
 	"properties": {
 		"linkedServiceName": {
-			"referenceName": "DS_SQLSERVER_SINK",
+			"referenceName": "LS_RESTAPI_SINK",
 			"type": "LinkedServiceReference"
 		},
 		"annotations": [],
@@ -11,7 +11,7 @@
 			"location": {
 				"type": "AzureBlobFSLocation",
 				"folderPath": {
-					"value": "@concat(\n    'sqlserver/',\n    formatDateTime(utcNow(), 'yyyy'), '/',\n    formatDateTime(utcNow(), 'MM'), '/',\n    formatDateTime(utcNow(), 'dd')\n)",
+					"value": "@concat(\n    'restapi/',\n    formatDateTime(utcNow(), 'yyyy'), '/',\n    formatDateTime(utcNow(), 'MM'), '/',\n    formatDateTime(utcNow(), 'dd')\n)",
 					"type": "Expression"
 				},
 				"fileSystem": "input"
