@@ -65,7 +65,7 @@
 			}
 		},
 		"variables": {
-			"Mapping": {
+			"Trigger_variable": {
 				"type": "String"
 			}
 		},
