@@ -1,9 +1,9 @@
 {
-	"name": "PL_SQLSERVER_PARQUET",
+	"name": "PL_CSV",
 	"properties": {
 		"activities": [
 			{
-				"name": "COPY_SQL_ADLS",
+				"name": "CSV_COPY",
 				"type": "Copy",
 				"dependsOn": [],
 				"policy": {
@@ -20,8 +20,6 @@
 						"storeSettings": {
 							"type": "AzureBlobFSReadSettings",
 							"recursive": true,
-							"wildcardFolderPath": "sqlserver",
-							"wildcardFileName": "*.csv",
 							"enablePartitionDiscovery": false
 						},
 						"formatSettings": {
@@ -49,13 +47,13 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "DS_SQLSERVER_SOURCE",
+						"referenceName": "DS_CSV_SOURCE",
 						"type": "DatasetReference"
 					}
 				],
 				"outputs": [
 					{
-						"referenceName": "DS_SQLSERVER_SINK",
+						"referenceName": "DS_CSV_SINK",
 						"type": "DatasetReference"
 					}
 				]

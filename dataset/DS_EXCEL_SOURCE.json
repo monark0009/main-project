@@ -1,0 +1,21 @@
+{
+	"name": "DS_EXCEL_SOURCE",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_EXCEL_SOURCE",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Excel",
+		"typeProperties": {
+			"sheetName": "Worksheet",
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": "order_reviews_dataset.xlsx",
+				"folderPath": "excel",
+				"fileSystem": "input"
+			}
+		},
+		"schema": []
+	}
+}

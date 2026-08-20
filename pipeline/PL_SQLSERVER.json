@@ -1,9 +1,9 @@
 {
-	"name": "PL_SNOWFLAKE_PARQUET",
+	"name": "PL_SQLSERVER",
 	"properties": {
 		"activities": [
 			{
-				"name": "SNOW_COPY",
+				"name": "COPY_SQL_ADLS",
 				"type": "Copy",
 				"dependsOn": [],
 				"policy": {
@@ -16,15 +16,22 @@
 				"userProperties": [],
 				"typeProperties": {
 					"source": {
-						"type": "SnowflakeV2Source",
-						"exportSettings": {
-							"type": "SnowflakeExportCopyCommand"
+						"type": "DelimitedTextSource",
+						"storeSettings": {
+							"type": "AzureBlobFSReadSettings",
+							"recursive": true,
+							"wildcardFolderPath": "sqlserver",
+							"wildcardFileName": "*.csv",
+							"enablePartitionDiscovery": false
+						},
+						"formatSettings": {
+							"type": "DelimitedTextReadSettings"
 						}
 					},
 					"sink": {
 						"type": "ParquetSink",
 						"storeSettings": {
-							"type": "AzureBlobStorageWriteSettings"
+							"type": "AzureBlobFSWriteSettings"
 						},
 						"formatSettings": {
 							"type": "ParquetWriteSettings"
@@ -42,13 +49,13 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "DS_SNOWFLAKE_PARQUT",
+						"referenceName": "DS_SQLSERVER_SOURCE",
 						"type": "DatasetReference"
 					}
 				],
 				"outputs": [
 					{
-						"referenceName": "DS_SNOWFLAKE_BLOB_PARQUET",
+						"referenceName": "DS_SQLSERVER_SINK",
 						"type": "DatasetReference"
 					}
 				]

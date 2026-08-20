@@ -1,0 +1,26 @@
+{
+	"name": "DS_CSV_SOURCE",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_CSV_SOURCE",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": "order_payments_dataset.csv",
+				"folderPath": "csv",
+				"fileSystem": "input"
+			},
+			"columnDelimiter": ",",
+			"rowDelimiter": "\n",
+			"compressionCodec": null,
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": []
+	}
+}

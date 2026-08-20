@@ -1,9 +1,9 @@
 {
-	"name": "PL_SFTP_PARQUET",
+	"name": "PL_EXCEL",
 	"properties": {
 		"activities": [
 			{
-				"name": "SFTP COPY",
+				"name": "EXCEL_COPY",
 				"type": "Copy",
 				"dependsOn": [],
 				"policy": {
@@ -16,14 +16,13 @@
 				"userProperties": [],
 				"typeProperties": {
 					"source": {
-						"type": "DelimitedTextSource",
+						"type": "ExcelSource",
 						"storeSettings": {
 							"type": "AzureBlobFSReadSettings",
 							"recursive": true,
+							"wildcardFolderPath": "excel",
+							"wildcardFileName": "*.xlsx",
 							"enablePartitionDiscovery": false
-						},
-						"formatSettings": {
-							"type": "DelimitedTextReadSettings"
 						}
 					},
 					"sink": {
@@ -47,13 +46,13 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "DS_SFTP_SOURCE",
+						"referenceName": "DS_EXCEL_SOURCE",
 						"type": "DatasetReference"
 					}
 				],
 				"outputs": [
 					{
-						"referenceName": "DS_SFTP_SINK",
+						"referenceName": "DS_EXCEL_SINK",
 						"type": "DatasetReference"
 					}
 				]

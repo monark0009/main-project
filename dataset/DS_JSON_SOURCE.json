@@ -1,0 +1,20 @@
+{
+	"name": "DS_JSON_SOURCE",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_JSON_SOURCE",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Json",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": "jsontest.json",
+				"folderPath": "json",
+				"fileSystem": "input"
+			}
+		},
+		"schema": {}
+	}
+}
