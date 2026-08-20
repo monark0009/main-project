@@ -47,19 +47,33 @@
 						"value": "@activity('LKUP_SRC_FILES').output.firstRow.L3_switch_type",
 						"type": "Expression"
 					},
-					"cases": [],
-					"defaultActivities": [
+					"cases": [
 						{
-							"name": "Execute Pipeline1",
-							"type": "ExecutePipeline",
-							"dependsOn": [],
-							"policy": {
-								"secureInput": false
-							},
-							"userProperties": [],
-							"typeProperties": {
-								"waitOnCompletion": true
-							}
+							"value": "CloudStorage",
+							"activities": [
+								{
+									"name": "EXECUTE_PL4",
+									"type": "ExecutePipeline",
+									"dependsOn": [],
+									"policy": {
+										"secureInput": false
+									},
+									"userProperties": [],
+									"typeProperties": {
+										"pipeline": {
+											"referenceName": "PL4_SWITCH_CSV_EXCEL",
+											"type": "PipelineReference"
+										},
+										"waitOnCompletion": true,
+										"parameters": {
+											"Trigger": {
+												"value": "@pipeline().parameters.Trigger",
+												"type": "Expression"
+											}
+										}
+									}
+								}
+							]
 						}
 					]
 				}
