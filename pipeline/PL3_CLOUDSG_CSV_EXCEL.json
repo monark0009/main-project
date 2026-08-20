@@ -47,25 +47,7 @@
 						"value": "@activity('LKUP_SRC_FILES').output.firstRow.L3_switch_type",
 						"type": "Expression"
 					},
-					"cases": [
-						{
-							"value": "Azure",
-							"activities": [
-								{
-									"name": "Execute Pipeline1",
-									"type": "ExecutePipeline",
-									"dependsOn": [],
-									"policy": {
-										"secureInput": false
-									},
-									"userProperties": [],
-									"typeProperties": {
-										"waitOnCompletion": true
-									}
-								}
-							]
-						}
-					]
+					"cases": []
 				}
 			}
 		],
