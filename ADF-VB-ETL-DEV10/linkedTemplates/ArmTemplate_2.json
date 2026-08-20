@@ -375,7 +375,7 @@
 							},
 							"cases": [
 								{
-									"value": "CloudStorage",
+									"value": "Azure",
 									"activities": [
 										{
 											"name": "EXECUTE_PL4",

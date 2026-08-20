@@ -378,7 +378,7 @@
 							},
 							"cases": [
 								{
-									"value": "CloudStorage",
+									"value": "Azure",
 									"activities": [
 										{
 											"name": "EXECUTE_PL4",
@@ -673,7 +673,7 @@
 					}
 				},
 				"variables": {
-					"Mapping": {
+					"Trigger_variable": {
 						"type": "String"
 					}
 				},
@@ -1124,7 +1124,10 @@
 				"annotations": [],
 				"type": "AzureSqlTable",
 				"schema": [],
-				"typeProperties": {}
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "vb_tbl_trigger"
+				}
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/linkedServices/LS_AZURESQL_DB_SOURCE')]"
