@@ -11,6 +11,10 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'accountKey' of 'DS_SQLSERVER_SINK'"
 		},
+		"LS_AZSQL_METADATA_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'LS_AZSQL_METADATA'"
+		},
 		"LS_AZURESQL_DB_SOURCE_password": {
 			"type": "secureString",
 			"metadata": "Secure string for 'password' of 'LS_AZURESQL_DB_SOURCE'"
@@ -70,6 +74,18 @@
 		"DS_SQLSERVER_SINK_properties_typeProperties_url": {
 			"type": "string",
 			"defaultValue": "https://adlsdevvbsrc0001.dfs.core.windows.net/"
+		},
+		"LS_AZSQL_METADATA_properties_typeProperties_server": {
+			"type": "string",
+			"defaultValue": "sql-sv-vb-dev1.database.windows.net"
+		},
+		"LS_AZSQL_METADATA_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "sql-db-vb-dev"
+		},
+		"LS_AZSQL_METADATA_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "access-data-dev"
 		},
 		"LS_AZURESQL_DB_SOURCE_properties_typeProperties_server": {
 			"type": "string",
@@ -252,7 +268,8 @@
 								"referenceName": "DS_AZURESQL_DB_SOURCE",
 								"type": "DatasetReference",
 								"parameters": {}
-							}
+							},
+							"firstRowOnly": true
 						}
 					},
 					{
@@ -312,11 +329,6 @@
 						"type": "string"
 					}
 				},
-				"variables": {
-					"Mapping": {
-						"type": "String"
-					}
-				},
 				"annotations": []
 			},
 			"dependsOn": [
@@ -353,7 +365,7 @@
 								"partitionOption": "None"
 							},
 							"dataset": {
-								"referenceName": "DS_AZURESQL_DB_SOURCE",
+								"referenceName": "DS_AZSQL_METADATA",
 								"type": "DatasetReference",
 								"parameters": {}
 							}
@@ -403,6 +415,34 @@
 											}
 										}
 									]
+								},
+								{
+									"value": "AWS",
+									"activities": [
+										{
+											"name": "Wait_AWS",
+											"type": "Wait",
+											"dependsOn": [],
+											"userProperties": [],
+											"typeProperties": {
+												"waitTimeInSeconds": 1
+											}
+										}
+									]
+								},
+								{
+									"value": "GCP",
+									"activities": [
+										{
+											"name": "Wait_GCP",
+											"type": "Wait",
+											"dependsOn": [],
+											"userProperties": [],
+											"typeProperties": {
+												"waitTimeInSeconds": 1
+											}
+										}
+									]
 								}
 							]
 						}
@@ -419,7 +459,7 @@
 				"annotations": []
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/datasets/DS_AZURESQL_DB_SOURCE')]",
+				"[concat(variables('factoryId'), '/datasets/DS_AZSQL_METADATA')]",
 				"[concat(variables('factoryId'), '/pipelines/PL4_SWITCH_CSV_EXCEL')]"
 			]
 		},
@@ -480,7 +520,7 @@
 									"value": "CSV",
 									"activities": [
 										{
-											"name": "EXECUTE_CSV",
+											"name": "EXECUTE_CSV_1_PL4",
 											"type": "ExecutePipeline",
 											"dependsOn": [],
 											"policy": {
@@ -490,6 +530,33 @@
 											"typeProperties": {
 												"pipeline": {
 													"referenceName": "PL_CSV",
+													"type": "PipelineReference"
+												},
+												"waitOnCompletion": true,
+												"parameters": {
+													"Trigger": {
+														"value": "@pipeline().parameters.Trigger",
+														"type": "Expression"
+													}
+												}
+											}
+										}
+									]
+								},
+								{
+									"value": "EXCEL",
+									"activities": [
+										{
+											"name": "EXECUTE_EXCEL_2_PL4",
+											"type": "ExecutePipeline",
+											"dependsOn": [],
+											"policy": {
+												"secureInput": false
+											},
+											"userProperties": [],
+											"typeProperties": {
+												"pipeline": {
+													"referenceName": "PL_EXCEL",
 													"type": "PipelineReference"
 												},
 												"waitOnCompletion": true,
@@ -519,7 +586,8 @@
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/datasets/DS_AZURESQL_DB_SOURCE')]",
-				"[concat(variables('factoryId'), '/pipelines/PL_CSV')]"
+				"[concat(variables('factoryId'), '/pipelines/PL_CSV')]",
+				"[concat(variables('factoryId'), '/pipelines/PL_EXCEL')]"
 			]
 		},
 		{
@@ -750,6 +818,11 @@
 				],
 				"policy": {
 					"elapsedTimeMetric": {}
+				},
+				"parameters": {
+					"Trigger": {
+						"type": "string"
+					}
 				},
 				"annotations": []
 			},
@@ -1110,6 +1183,27 @@
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/datasets/DS_SQLSERVER_SOURCE')]",
 				"[concat(variables('factoryId'), '/datasets/DS_SQLSERVER_SINK')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/DS_AZSQL_METADATA')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "LS_AZSQL_METADATA",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "vb_tbl_trigger"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/LS_AZSQL_METADATA')]"
 			]
 		},
 		{
@@ -1701,6 +1795,28 @@
 					"accountKey": {
 						"type": "SecureString",
 						"value": "[parameters('DS_SQLSERVER_SINK_accountKey')]"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/LS_AZSQL_METADATA')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureSqlDatabase",
+				"typeProperties": {
+					"server": "[parameters('LS_AZSQL_METADATA_properties_typeProperties_server')]",
+					"database": "[parameters('LS_AZSQL_METADATA_properties_typeProperties_database')]",
+					"encrypt": "optional",
+					"trustServerCertificate": false,
+					"authenticationType": "SQL",
+					"userName": "[parameters('LS_AZSQL_METADATA_properties_typeProperties_userName')]",
+					"password": {
+						"type": "SecureString",
+						"value": "[parameters('LS_AZSQL_METADATA_password')]"
 					}
 				}
 			},

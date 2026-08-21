@@ -8,6 +8,9 @@
 		"DS_SQLSERVER_SINK_accountKey": {
 			"value": ""
 		},
+		"LS_AZSQL_METADATA_password": {
+			"value": ""
+		},
 		"LS_AZURESQL_DB_SOURCE_password": {
 			"value": ""
 		},
@@ -52,6 +55,15 @@
 		},
 		"DS_SQLSERVER_SINK_properties_typeProperties_url": {
 			"value": "https://adlsdevvbsrc0001.dfs.core.windows.net/"
+		},
+		"LS_AZSQL_METADATA_properties_typeProperties_server": {
+			"value": "sql-sv-vb-dev1.database.windows.net"
+		},
+		"LS_AZSQL_METADATA_properties_typeProperties_database": {
+			"value": "sql-db-vb-dev"
+		},
+		"LS_AZSQL_METADATA_properties_typeProperties_userName": {
+			"value": "access-data-dev"
 		},
 		"LS_AZURESQL_DB_SOURCE_properties_typeProperties_server": {
 			"value": "sql-sv-vb-dev1.database.windows.net"

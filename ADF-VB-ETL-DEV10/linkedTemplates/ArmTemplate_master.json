@@ -11,6 +11,10 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'accountKey' of 'DS_SQLSERVER_SINK'"
 		},
+		"LS_AZSQL_METADATA_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'LS_AZSQL_METADATA'"
+		},
 		"LS_AZURESQL_DB_SOURCE_password": {
 			"type": "secureString",
 			"metadata": "Secure string for 'password' of 'LS_AZURESQL_DB_SOURCE'"
@@ -70,6 +74,18 @@
 		"DS_SQLSERVER_SINK_properties_typeProperties_url": {
 			"type": "string",
 			"defaultValue": "https://adlsdevvbsrc0001.dfs.core.windows.net/"
+		},
+		"LS_AZSQL_METADATA_properties_typeProperties_server": {
+			"type": "string",
+			"defaultValue": "sql-sv-vb-dev1.database.windows.net"
+		},
+		"LS_AZSQL_METADATA_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "sql-db-vb-dev"
+		},
+		"LS_AZSQL_METADATA_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "access-data-dev"
 		},
 		"LS_AZURESQL_DB_SOURCE_properties_typeProperties_server": {
 			"type": "string",
@@ -173,6 +189,9 @@
 					"DS_SQLSERVER_SINK_accountKey": {
 						"value": "[parameters('DS_SQLSERVER_SINK_accountKey')]"
 					},
+					"LS_AZSQL_METADATA_password": {
+						"value": "[parameters('LS_AZSQL_METADATA_password')]"
+					},
 					"LS_AZURESQL_DB_SOURCE_password": {
 						"value": "[parameters('LS_AZURESQL_DB_SOURCE_password')]"
 					},
@@ -217,6 +236,15 @@
 					},
 					"DS_SQLSERVER_SINK_properties_typeProperties_url": {
 						"value": "[parameters('DS_SQLSERVER_SINK_properties_typeProperties_url')]"
+					},
+					"LS_AZSQL_METADATA_properties_typeProperties_server": {
+						"value": "[parameters('LS_AZSQL_METADATA_properties_typeProperties_server')]"
+					},
+					"LS_AZSQL_METADATA_properties_typeProperties_database": {
+						"value": "[parameters('LS_AZSQL_METADATA_properties_typeProperties_database')]"
+					},
+					"LS_AZSQL_METADATA_properties_typeProperties_userName": {
+						"value": "[parameters('LS_AZSQL_METADATA_properties_typeProperties_userName')]"
 					},
 					"LS_AZURESQL_DB_SOURCE_properties_typeProperties_server": {
 						"value": "[parameters('LS_AZURESQL_DB_SOURCE_properties_typeProperties_server')]"
