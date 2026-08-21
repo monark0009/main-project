@@ -49,10 +49,10 @@
 					},
 					"cases": [
 						{
-							"value": "CSV",
+							"value": "csv",
 							"activities": [
 								{
-									"name": "EXECUTE_CSV_1_PL4",
+									"name": "Exec_csv_1_PL4",
 									"type": "ExecutePipeline",
 									"dependsOn": [],
 									"policy": {
@@ -76,10 +76,10 @@
 							]
 						},
 						{
-							"value": "EXCEL",
+							"value": "excel",
 							"activities": [
 								{
-									"name": "EXECUTE_EXCEL_2_PL4",
+									"name": "Exec_excel_2_PL4",
 									"type": "ExecutePipeline",
 									"dependsOn": [],
 									"policy": {
