@@ -1,0 +1,55 @@
+{
+	"name": "DS_AZSQLDB_LKUP_MODIFIED",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "DS_AZSQLDB_LKUP_MODIFIED",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "job_dtls_id",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "jobid",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "dtls_key",
+				"type": "varchar"
+			},
+			{
+				"name": "dtls_value",
+				"type": "varchar"
+			},
+			{
+				"name": "created_user",
+				"type": "varchar"
+			},
+			{
+				"name": "created_date",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "updated_user",
+				"type": "varchar"
+			},
+			{
+				"name": "updated_date",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "vb_tbl_job_dtls"
+		}
+	}
+}
