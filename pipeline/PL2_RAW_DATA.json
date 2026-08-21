@@ -27,7 +27,8 @@
 					"dataset": {
 						"referenceName": "DS_AZURESQL_DB_SOURCE",
 						"type": "DatasetReference"
-					}
+					},
+					"firstRowOnly": true
 				}
 			},
 			{
@@ -82,11 +83,6 @@
 		"parameters": {
 			"Trigger": {
 				"type": "string"
-			}
-		},
-		"variables": {
-			"Mapping": {
-				"type": "String"
 			}
 		},
 		"annotations": []

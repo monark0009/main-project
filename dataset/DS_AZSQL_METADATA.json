@@ -1,0 +1,16 @@
+{
+	"name": "DS_AZSQL_METADATA",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_AZSQL_METADATA",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "vb_tbl_trigger"
+		}
+	}
+}

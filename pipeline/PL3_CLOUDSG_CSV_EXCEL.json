@@ -25,7 +25,7 @@
 						"partitionOption": "None"
 					},
 					"dataset": {
-						"referenceName": "DS_AZURESQL_DB_SOURCE",
+						"referenceName": "DS_AZSQL_METADATA",
 						"type": "DatasetReference"
 					}
 				}
@@ -71,6 +71,34 @@
 												"type": "Expression"
 											}
 										}
+									}
+								}
+							]
+						},
+						{
+							"value": "AWS",
+							"activities": [
+								{
+									"name": "Wait_AWS",
+									"type": "Wait",
+									"dependsOn": [],
+									"userProperties": [],
+									"typeProperties": {
+										"waitTimeInSeconds": 1
+									}
+								}
+							]
+						},
+						{
+							"value": "GCP",
+							"activities": [
+								{
+									"name": "Wait_GCP",
+									"type": "Wait",
+									"dependsOn": [],
+									"userProperties": [],
+									"typeProperties": {
+										"waitTimeInSeconds": 1
 									}
 								}
 							]

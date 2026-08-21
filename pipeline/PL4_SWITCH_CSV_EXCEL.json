@@ -52,7 +52,7 @@
 							"value": "CSV",
 							"activities": [
 								{
-									"name": "EXECUTE_CSV",
+									"name": "EXECUTE_CSV_1_PL4",
 									"type": "ExecutePipeline",
 									"dependsOn": [],
 									"policy": {
@@ -62,6 +62,33 @@
 									"typeProperties": {
 										"pipeline": {
 											"referenceName": "PL_CSV",
+											"type": "PipelineReference"
+										},
+										"waitOnCompletion": true,
+										"parameters": {
+											"Trigger": {
+												"value": "@pipeline().parameters.Trigger",
+												"type": "Expression"
+											}
+										}
+									}
+								}
+							]
+						},
+						{
+							"value": "EXCEL",
+							"activities": [
+								{
+									"name": "EXECUTE_EXCEL_2_PL4",
+									"type": "ExecutePipeline",
+									"dependsOn": [],
+									"policy": {
+										"secureInput": false
+									},
+									"userProperties": [],
+									"typeProperties": {
+										"pipeline": {
+											"referenceName": "PL_EXCEL",
 											"type": "PipelineReference"
 										},
 										"waitOnCompletion": true,
