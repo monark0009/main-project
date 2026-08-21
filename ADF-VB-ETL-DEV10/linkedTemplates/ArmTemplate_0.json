@@ -7,6 +7,10 @@
 			"metadata": "Data Factory name",
 			"defaultValue": "ADF-VB-ETL-DEV10"
 		},
+		"DS_AZSQLDB_LKUP_MODIFIED_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'DS_AZSQLDB_LKUP_MODIFIED'"
+		},
 		"DS_SQLSERVER_SINK_accountKey": {
 			"type": "secureString",
 			"metadata": "Secure string for 'accountKey' of 'DS_SQLSERVER_SINK'"
@@ -70,6 +74,18 @@
 		"LS_SQLSERVER_SOURCE_accountKey": {
 			"type": "secureString",
 			"metadata": "Secure string for 'accountKey' of 'LS_SQLSERVER_SOURCE'"
+		},
+		"DS_AZSQLDB_LKUP_MODIFIED_properties_typeProperties_server": {
+			"type": "string",
+			"defaultValue": "sql-sv-vb-dev1.database.windows.net"
+		},
+		"DS_AZSQLDB_LKUP_MODIFIED_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "sql-db-vb-dev"
+		},
+		"DS_AZSQLDB_LKUP_MODIFIED_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "access-data-dev"
 		},
 		"DS_SQLSERVER_SINK_properties_typeProperties_url": {
 			"type": "string",
@@ -164,6 +180,28 @@
 		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
 	},
 	"resources": [
+		{
+			"name": "[concat(parameters('factoryName'), '/DS_AZSQLDB_LKUP_MODIFIED')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureSqlDatabase",
+				"typeProperties": {
+					"server": "[parameters('DS_AZSQLDB_LKUP_MODIFIED_properties_typeProperties_server')]",
+					"database": "[parameters('DS_AZSQLDB_LKUP_MODIFIED_properties_typeProperties_database')]",
+					"encrypt": "optional",
+					"trustServerCertificate": false,
+					"authenticationType": "SQL",
+					"userName": "[parameters('DS_AZSQLDB_LKUP_MODIFIED_properties_typeProperties_userName')]",
+					"password": {
+						"type": "SecureString",
+						"value": "[parameters('DS_AZSQLDB_LKUP_MODIFIED_password')]"
+					}
+				}
+			},
+			"dependsOn": []
+		},
 		{
 			"name": "[concat(parameters('factoryName'), '/DS_SQLSERVER_SINK')]",
 			"type": "Microsoft.DataFactory/factories/linkedServices",
@@ -488,27 +526,6 @@
 				"typeProperties": {}
 			},
 			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/DS_AZSQL_METADATA')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "LS_AZSQL_METADATA",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "AzureSqlTable",
-				"schema": [],
-				"typeProperties": {
-					"schema": "dbo",
-					"table": "vb_tbl_trigger"
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/LS_AZSQL_METADATA')]"
-			]
 		}
 	]
 }

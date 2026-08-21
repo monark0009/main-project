@@ -7,6 +7,10 @@
 			"metadata": "Data Factory name",
 			"defaultValue": "ADF-VB-ETL-DEV10"
 		},
+		"DS_AZSQLDB_LKUP_MODIFIED_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'DS_AZSQLDB_LKUP_MODIFIED'"
+		},
 		"DS_SQLSERVER_SINK_accountKey": {
 			"type": "secureString",
 			"metadata": "Secure string for 'accountKey' of 'DS_SQLSERVER_SINK'"
@@ -70,6 +74,18 @@
 		"LS_SQLSERVER_SOURCE_accountKey": {
 			"type": "secureString",
 			"metadata": "Secure string for 'accountKey' of 'LS_SQLSERVER_SOURCE'"
+		},
+		"DS_AZSQLDB_LKUP_MODIFIED_properties_typeProperties_server": {
+			"type": "string",
+			"defaultValue": "sql-sv-vb-dev1.database.windows.net"
+		},
+		"DS_AZSQLDB_LKUP_MODIFIED_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "sql-db-vb-dev"
+		},
+		"DS_AZSQLDB_LKUP_MODIFIED_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "access-data-dev"
 		},
 		"DS_SQLSERVER_SINK_properties_typeProperties_url": {
 			"type": "string",
@@ -186,6 +202,9 @@
 					"factoryName": {
 						"value": "[parameters('factoryName')]"
 					},
+					"DS_AZSQLDB_LKUP_MODIFIED_password": {
+						"value": "[parameters('DS_AZSQLDB_LKUP_MODIFIED_password')]"
+					},
 					"DS_SQLSERVER_SINK_accountKey": {
 						"value": "[parameters('DS_SQLSERVER_SINK_accountKey')]"
 					},
@@ -233,6 +252,15 @@
 					},
 					"LS_SQLSERVER_SOURCE_accountKey": {
 						"value": "[parameters('LS_SQLSERVER_SOURCE_accountKey')]"
+					},
+					"DS_AZSQLDB_LKUP_MODIFIED_properties_typeProperties_server": {
+						"value": "[parameters('DS_AZSQLDB_LKUP_MODIFIED_properties_typeProperties_server')]"
+					},
+					"DS_AZSQLDB_LKUP_MODIFIED_properties_typeProperties_database": {
+						"value": "[parameters('DS_AZSQLDB_LKUP_MODIFIED_properties_typeProperties_database')]"
+					},
+					"DS_AZSQLDB_LKUP_MODIFIED_properties_typeProperties_userName": {
+						"value": "[parameters('DS_AZSQLDB_LKUP_MODIFIED_properties_typeProperties_userName')]"
 					},
 					"DS_SQLSERVER_SINK_properties_typeProperties_url": {
 						"value": "[parameters('DS_SQLSERVER_SINK_properties_typeProperties_url')]"

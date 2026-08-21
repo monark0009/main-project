@@ -5,6 +5,9 @@
 		"factoryName": {
 			"value": "ADF-VB-ETL-DEV10"
 		},
+		"DS_AZSQLDB_LKUP_MODIFIED_password": {
+			"value": ""
+		},
 		"DS_SQLSERVER_SINK_accountKey": {
 			"value": ""
 		},
@@ -52,6 +55,15 @@
 		},
 		"LS_SQLSERVER_SOURCE_accountKey": {
 			"value": ""
+		},
+		"DS_AZSQLDB_LKUP_MODIFIED_properties_typeProperties_server": {
+			"value": "sql-sv-vb-dev1.database.windows.net"
+		},
+		"DS_AZSQLDB_LKUP_MODIFIED_properties_typeProperties_database": {
+			"value": "sql-db-vb-dev"
+		},
+		"DS_AZSQLDB_LKUP_MODIFIED_properties_typeProperties_userName": {
+			"value": "access-data-dev"
 		},
 		"DS_SQLSERVER_SINK_properties_typeProperties_url": {
 			"value": "https://adlsdevvbsrc0001.dfs.core.windows.net/"
