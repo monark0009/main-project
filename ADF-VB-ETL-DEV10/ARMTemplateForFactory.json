@@ -545,7 +545,7 @@
 											"userProperties": [],
 											"typeProperties": {
 												"pipeline": {
-													"referenceName": "PL_CSV",
+													"referenceName": "PL_CSV_MODIFIED",
 													"type": "PipelineReference"
 												},
 												"waitOnCompletion": true,
@@ -602,7 +602,7 @@
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/datasets/DS_AZURESQL_DB_SOURCE')]",
-				"[concat(variables('factoryId'), '/pipelines/PL_CSV')]",
+				"[concat(variables('factoryId'), '/pipelines/PL_CSV_MODIFIED')]",
 				"[concat(variables('factoryId'), '/pipelines/PL_EXCEL')]"
 			]
 		},
