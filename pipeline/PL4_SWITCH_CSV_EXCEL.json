@@ -61,7 +61,7 @@
 									"userProperties": [],
 									"typeProperties": {
 										"pipeline": {
-											"referenceName": "PL_CSV",
+											"referenceName": "PL_CSV_MODIFIED",
 											"type": "PipelineReference"
 										},
 										"waitOnCompletion": true,
