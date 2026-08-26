@@ -106,7 +106,7 @@
 						"typeProperties": {
 							"source": {
 								"type": "AzureSqlSource",
-								"sqlReaderStoredProcedureName": "[[dbo].[vb_get_job_dtls]",
+								"sqlReaderStoredProcedureName": "[[dbo].[vb_gett_job_dtls]",
 								"storedProcedureParameters": {
 									"TriggerName": {
 										"type": "String",
@@ -1181,7 +1181,7 @@
 						"typeProperties": {
 							"source": {
 								"type": "AzureSqlSource",
-								"sqlReaderStoredProcedureName": "[[dbo].[vb_get_job_dtls]",
+								"sqlReaderStoredProcedureName": "[[dbo].[vb_gett_job_dtls]",
 								"storedProcedureParameters": {
 									"TriggerName": {
 										"type": "String",
@@ -1520,7 +1520,7 @@
 						"typeProperties": {
 							"source": {
 								"type": "AzureSqlSource",
-								"sqlReaderStoredProcedureName": "[[dbo].[vb_get_job_dtls]",
+								"sqlReaderStoredProcedureName": "[[dbo].[vb_gett_job_dtls]",
 								"storedProcedureParameters": {
 									"TriggerName": {
 										"type": "String",
@@ -1879,7 +1879,7 @@
 						"typeProperties": {
 							"source": {
 								"type": "AzureSqlSource",
-								"sqlReaderStoredProcedureName": "[[dbo].[vb_get_job_dtls]",
+								"sqlReaderStoredProcedureName": "[[dbo].[vb_gett_job_dtls]",
 								"storedProcedureParameters": {
 									"TriggerName": {
 										"type": "String",
@@ -2225,7 +2225,7 @@
 						"typeProperties": {
 							"source": {
 								"type": "AzureSqlSource",
-								"sqlReaderStoredProcedureName": "[[dbo].[vb_get_job_dtls]",
+								"sqlReaderStoredProcedureName": "[[dbo].[vb_gett_job_dtls]",
 								"storedProcedureParameters": {
 									"TriggerName": {
 										"type": "String",
@@ -2588,7 +2588,7 @@
 						"typeProperties": {
 							"source": {
 								"type": "AzureSqlSource",
-								"sqlReaderStoredProcedureName": "[[dbo].[vb_get_job_dtls]",
+								"sqlReaderStoredProcedureName": "[[dbo].[vb_gett_job_dtls]",
 								"storedProcedureParameters": {
 									"TriggerName": {
 										"type": "String",
@@ -2918,7 +2918,7 @@
 									]
 								},
 								{
-									"value": "restapi",
+									"value": "restApi",
 									"activities": [
 										{
 											"name": "EXEC_RESTAPI_2_PL4",
@@ -2999,7 +2999,7 @@
 									]
 								},
 								{
-									"value": "sqlserver",
+									"value": "sql",
 									"activities": [
 										{
 											"name": "EXEC_SQLSERVER_2_PL4",
@@ -3026,7 +3026,7 @@
 									]
 								},
 								{
-									"value": "bulkload",
+									"value": "bulk",
 									"activities": [
 										{
 											"name": "EXEC_BULKLOAD_2_PL4",
@@ -3283,6 +3283,168 @@
 											}
 										}
 									]
+								},
+								{
+									"value": "API",
+									"activities": [
+										{
+											"name": "EXEC_PL3_API",
+											"type": "ExecutePipeline",
+											"dependsOn": [],
+											"policy": {
+												"secureInput": false
+											},
+											"userProperties": [],
+											"typeProperties": {
+												"pipeline": {
+													"referenceName": "PL3_CLOUDSG_CSV_EXCEL",
+													"type": "PipelineReference"
+												},
+												"waitOnCompletion": true,
+												"parameters": {
+													"Trigger": {
+														"value": "@pipeline().parameters.Trigger",
+														"type": "Expression"
+													}
+												}
+											}
+										}
+									]
+								},
+								{
+									"value": "sql",
+									"activities": [
+										{
+											"name": "EXEC_PL2_SQL",
+											"type": "ExecutePipeline",
+											"dependsOn": [],
+											"policy": {
+												"secureInput": false
+											},
+											"userProperties": [],
+											"typeProperties": {
+												"pipeline": {
+													"referenceName": "PL3_CLOUDSG_CSV_EXCEL",
+													"type": "PipelineReference"
+												},
+												"waitOnCompletion": true,
+												"parameters": {
+													"Trigger": {
+														"value": "@pipeline().parameters.Trigger",
+														"type": "Expression"
+													}
+												}
+											}
+										}
+									]
+								},
+								{
+									"value": "sftp",
+									"activities": [
+										{
+											"name": "EXEC_PL2_SFTP",
+											"type": "ExecutePipeline",
+											"dependsOn": [],
+											"policy": {
+												"secureInput": false
+											},
+											"userProperties": [],
+											"typeProperties": {
+												"pipeline": {
+													"referenceName": "PL3_CLOUDSG_CSV_EXCEL",
+													"type": "PipelineReference"
+												},
+												"waitOnCompletion": true,
+												"parameters": {
+													"Trigger": {
+														"value": "@pipeline().parameters.Trigger",
+														"type": "Expression"
+													}
+												}
+											}
+										}
+									]
+								},
+								{
+									"value": "snowflake",
+									"activities": [
+										{
+											"name": "EXEC_PL2_SNOWFLAKE",
+											"type": "ExecutePipeline",
+											"dependsOn": [],
+											"policy": {
+												"secureInput": false
+											},
+											"userProperties": [],
+											"typeProperties": {
+												"pipeline": {
+													"referenceName": "PL3_CLOUDSG_CSV_EXCEL",
+													"type": "PipelineReference"
+												},
+												"waitOnCompletion": true,
+												"parameters": {
+													"Trigger": {
+														"value": "@pipeline().parameters.Trigger",
+														"type": "Expression"
+													}
+												}
+											}
+										}
+									]
+								},
+								{
+									"value": "bulk",
+									"activities": [
+										{
+											"name": "EXEC_PL2_BULK",
+											"type": "ExecutePipeline",
+											"dependsOn": [],
+											"policy": {
+												"secureInput": false
+											},
+											"userProperties": [],
+											"typeProperties": {
+												"pipeline": {
+													"referenceName": "PL3_CLOUDSG_CSV_EXCEL",
+													"type": "PipelineReference"
+												},
+												"waitOnCompletion": true,
+												"parameters": {
+													"Trigger": {
+														"value": "@pipeline().parameters.Trigger",
+														"type": "Expression"
+													}
+												}
+											}
+										}
+									]
+								},
+								{
+									"value": "json",
+									"activities": [
+										{
+											"name": "EXEC_PL2_JSON",
+											"type": "ExecutePipeline",
+											"dependsOn": [],
+											"policy": {
+												"secureInput": false
+											},
+											"userProperties": [],
+											"typeProperties": {
+												"pipeline": {
+													"referenceName": "PL3_CLOUDSG_CSV_EXCEL",
+													"type": "PipelineReference"
+												},
+												"waitOnCompletion": true,
+												"parameters": {
+													"Trigger": {
+														"value": "@pipeline().parameters.Trigger",
+														"type": "Expression"
+													}
+												}
+											}
+										}
+									]
 								}
 							]
 						}
@@ -3294,6 +3456,11 @@
 				"parameters": {
 					"Trigger": {
 						"type": "string"
+					}
+				},
+				"variables": {
+					"Trigger_variable": {
+						"type": "String"
 					}
 				},
 				"annotations": []
