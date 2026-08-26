@@ -130,7 +130,7 @@
 							]
 						},
 						{
-							"value": "restapi",
+							"value": "restApi",
 							"activities": [
 								{
 									"name": "EXEC_RESTAPI_2_PL4",
@@ -211,7 +211,7 @@
 							]
 						},
 						{
-							"value": "sqlserver",
+							"value": "sql",
 							"activities": [
 								{
 									"name": "EXEC_SQLSERVER_2_PL4",
@@ -238,7 +238,7 @@
 							]
 						},
 						{
-							"value": "bulkload",
+							"value": "bulk",
 							"activities": [
 								{
 									"name": "EXEC_BULKLOAD_2_PL4",

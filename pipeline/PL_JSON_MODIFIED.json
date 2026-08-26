@@ -78,7 +78,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "AzureSqlSource",
-						"sqlReaderStoredProcedureName": "[dbo].[vb_get_job_dtls]",
+						"sqlReaderStoredProcedureName": "[dbo].[vb_gett_job_dtls]",
 						"storedProcedureParameters": {
 							"TriggerName": {
 								"type": "String",
