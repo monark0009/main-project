@@ -1,9 +1,9 @@
 {
-	"name": "PL_JSON_MODIFIED",
+	"name": "PL_BULKLOAD_MODIFIED",
 	"properties": {
 		"activities": [
 			{
-				"name": "JSON_COPY",
+				"name": "BULK_COPY",
 				"type": "Copy",
 				"dependsOn": [
 					{
@@ -29,14 +29,16 @@
 				"userProperties": [],
 				"typeProperties": {
 					"source": {
-						"type": "JsonSource",
+						"type": "DelimitedTextSource",
 						"storeSettings": {
 							"type": "AzureBlobFSReadSettings",
 							"recursive": true,
+							"wildcardFolderPath": "bulkupload",
+							"wildcardFileName": "*.csv",
 							"enablePartitionDiscovery": false
 						},
 						"formatSettings": {
-							"type": "JsonReadSettings"
+							"type": "DelimitedTextReadSettings"
 						}
 					},
 					"sink": {
@@ -48,23 +50,31 @@
 							"type": "ParquetWriteSettings"
 						}
 					},
-					"enableStaging": false
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
 				},
 				"inputs": [
 					{
-						"referenceName": "DS_JSON_SOURCE",
+						"referenceName": "DS_BULK_SOURCE",
 						"type": "DatasetReference"
 					}
 				],
 				"outputs": [
 					{
-						"referenceName": "DS_JSON_SINK",
+						"referenceName": "DS_BULK_SINK",
 						"type": "DatasetReference"
 					}
 				]
 			},
 			{
-				"name": "LKUP_JOB_DETAIL",
+				"name": "LKUP_JOB_DETAILS",
 				"type": "Lookup",
 				"dependsOn": [],
 				"policy": {
@@ -102,7 +112,7 @@
 				"type": "SqlServerStoredProcedure",
 				"dependsOn": [
 					{
-						"activity": "LKUP_JOB_DETAIL",
+						"activity": "LKUP_JOB_DETAILS",
 						"dependencyConditions": [
 							"Succeeded"
 						]
@@ -121,7 +131,7 @@
 					"storedProcedureParameters": {
 						"jobid": {
 							"value": {
-								"value": "@activity('LKUP_JOB_DETAIL').output.firstRow.jobid",
+								"value": "@activity('LKUP_JOB_DETAILS').output.firstRow.jobid",
 								"type": "Expression"
 							},
 							"type": "Int32"
@@ -158,11 +168,11 @@
 				}
 			},
 			{
-				"name": "SP-SUCESS-LOG-ENTRY",
+				"name": "SP_SUCESS_LOG_ENTRY",
 				"type": "SqlServerStoredProcedure",
 				"dependsOn": [
 					{
-						"activity": "JSON_COPY",
+						"activity": "BULK_COPY",
 						"dependencyConditions": [
 							"Succeeded"
 						]
@@ -185,7 +195,7 @@
 						},
 						"jobid": {
 							"value": {
-								"value": "@activity('LKUP_JOB_DETAIL').output.firstRow.jobid",
+								"value": "@activity('LKUP_JOB_DETAILS').output.firstRow.JOBID",
 								"type": "Expression"
 							},
 							"type": "Int32"
@@ -205,11 +215,11 @@
 				}
 			},
 			{
-				"name": "SP-FAIL-LOG-ENTRY",
+				"name": "SP_FAIL_LOG_ENTRY",
 				"type": "SqlServerStoredProcedure",
 				"dependsOn": [
 					{
-						"activity": "JSON_COPY",
+						"activity": "BULK_COPY",
 						"dependencyConditions": [
 							"Failed"
 						]
@@ -228,14 +238,14 @@
 					"storedProcedureParameters": {
 						"error": {
 							"value": {
-								"value": "@activity('JSON_COPY').error.message",
+								"value": "@activity('BULK_COPY').error.message",
 								"type": "Expression"
 							},
 							"type": "String"
 						},
 						"jobid": {
 							"value": {
-								"value": "@activity('LKUP_JOB_DETAIL').output.firstRow.jobid",
+								"value": "@activity('LKUP_JOB_DETAILS').output.firstRow.jobid",
 								"type": "Expression"
 							},
 							"type": "Int32"
